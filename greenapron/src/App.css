@@ -6,6 +6,11 @@ body{
   text-align: center;
 }
 
+.App h1{
+  color:white;
+  font-family: monospace;
+}
+
 
 
 @media (prefers-reduced-motion: no-preference) {
