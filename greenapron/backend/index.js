@@ -1,8 +1,16 @@
 const express = require('express');
 const messagesRouter = require('./routes/messages');
-
+const cors = require('cors');
 
 const app = express();
+
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
+
 
 app.use(express.json());
 
