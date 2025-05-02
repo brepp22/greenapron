@@ -9,7 +9,13 @@ function findById(id) {
   return db('users').where({ id }).first();
 }
 
+// Add this function to retrieve all users
+function getAllUsers() {
+  return db('users');  // This will return all users from the 'users' table
+}
+
 module.exports = {
   createUser,
   findById,
+  getAllUsers  // Export the new function
 };

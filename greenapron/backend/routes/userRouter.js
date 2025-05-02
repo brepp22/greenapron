@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const Users = require('../models/users'); // adjust the path as needed
+const Users = require('../models/users'); 
+
+router.get('/', async (req, res) => {
+    try {
+      const users = await Users.getAllUsers(); 
+      res.json(users);
+    } catch (err) {
+      res.status(500).json({ message: 'Server error', error: err.message });
+    }
+  });
+  
 
 router.post('/', async (req, res) => {
   try {
