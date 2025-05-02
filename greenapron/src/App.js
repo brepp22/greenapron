@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchPeople = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/messages/1'); // Adjust URL based on your backend
+        const response = await fetch('http://localhost:8080/api/users'); // Adjust URL based on your backend
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
