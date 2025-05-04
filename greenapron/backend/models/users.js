@@ -1,4 +1,4 @@
-const db = require('../db'); // adjust the path as needed
+const db = require('../db'); 
 
 async function createUser(user) {
   const [id] = await db('users').insert(user);
@@ -9,13 +9,13 @@ function findById(id) {
   return db('users').where({ id }).first();
 }
 
-// Add this function to retrieve all users
+/
 function getAllUsers() {
-  return db('users');  // This will return all users from the 'users' table
+  return db('users');  
 }
 
 module.exports = {
   createUser,
   findById,
-  getAllUsers  // Export the new function
+  getAllUsers  
 };
