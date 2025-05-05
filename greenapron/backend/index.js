@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const messagesRouter = require('./models/messages');
+const messagesRouter = require('./routes/messageRouter');
 
 const app = express();
 
 
 const usersRouter = require('./routes/userRouter'); 
+
 
 
 

@@ -17,8 +17,16 @@ function addMessage(message) {
     .returning('*'); 
 }
 
+function createMessage(person_id, text) {
+  const newMessage = {person_id , text};
+  return db('messages')
+    .insert(newMessage)
+    .then(() => getMessagesByPersonId(person_id).first())
+}
+
 module.exports = {
   getAllMessages,
   getMessagesByPersonId,
   addMessage,
+  createMessage,
 };

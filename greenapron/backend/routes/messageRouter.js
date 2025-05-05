@@ -4,7 +4,7 @@ const Message = require('../models/messages');
 
 router.get('/', async (req, res) => {
     try {
-      const users = await Message.getAllUsers(); 
+      const users = await Message.getAllMessages(); 
       res.json(users);
     } catch (err) {
       res.status(500).json({ message: 'Server error', error: err.message });
@@ -14,21 +14,18 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { text , person_id } = req.body;
 
-    if (!name || !email || !password) {
+    if (!text || !person_id) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const newUser = await Users.createUser({ name, email, password });
-    res.status(201).json(newUser);
+    const newMessage = await Message.createMessage({ text, person_id });
+    console.log(`${text}`)
+    res.status(201).json(newMessage);
   } catch (err) {
-    if (err.code === 'SQLITE_CONSTRAINT') {
-      res.status(409).json({ message: 'Email already exists' });
-    } else {
       res.status(500).json({ message: 'Server error', error: err.message });
     }
-  }
-});
+  });
 
 module.exports = router;
