@@ -6,7 +6,10 @@
 exports.up = function(knex) {
     return knex.schema.createTable('messages', (table) => {
       table.increments('id');
-      table.integer('person_id').notNullable(); 
+      table.integer('person_id').notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE');
       table.string('text').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
     });
