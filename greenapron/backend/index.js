@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const messagesRouter = require('./routes/messageRouter');
+const usersRouter = require('./routes/userRouter'); 
 
 const app = express();
 
 
-const usersRouter = require('./routes/userRouter'); 
 
 
 
@@ -20,14 +20,13 @@ app.use(express.json());
 
 
 app.use('/api/users', usersRouter);
+app.use('/api/messages', messagesRouter)
 
 app.get('/', (req, res) => {
   res.send('API is running');
 });
 
 
-// Routes
-app.use('/api/messages', messagesRouter);
 
 app.get('/', (req, res) => {
   res.send('API is up and running!');

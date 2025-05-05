@@ -6,74 +6,68 @@ function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchPeople = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:8080/api/users');
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       const data = await response.json();
-
-  //       const peopleData = data.map(user => ({
-  //         name: user.name,
-  //         role: user.email, // Use another field if you prefer
-  //         image: ''
-  //       }));
-
-  //       setPeople(peopleData);
-  //     } catch (error) {
-  //       console.error('Fetch error:', error);
-  //       setError(error.message);
-  //     }
-  //   };
-
-  //   fetchPeople();
-  // }, []);
-
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPeopleAndMessages = async () => {
       try {
-        const [usersRes, messagesRes] = await Promise.all([
-          fetch('http://localhost:8080/api/users'),
-          fetch('http://localhost:8080/api/messages'),
-        ]);
-  
-        if (!usersRes.ok || !messagesRes.ok) {
-          throw new Error('One or more network responses were not ok');
+        const usersResponse = await fetch('http://localhost:8080/api/users');
+        if (!usersResponse.ok) {
+          throw new Error('Failed to fetch users');
         }
-  
-        const [users, messages] = await Promise.all([
-          usersRes.json(),
-          messagesRes.json(),
-        ]);
-  
-        const peopleWithMessages = users.map(user => ({
-          id: user.id,
-          name: user.name,
-          role: user.email, // or another role field
-          image: '', // add image if available
-          messages: messages
-            .filter(msg => msg.person_id === user.id)
-            .map(msg => msg.text), // or include more fields if needed
+        const usersData = await usersResponse.json();
+
+        // Fetch messages for each user
+        const usersWithMessages = await Promise.all(usersData.map(async (user) => {
+          const messagesResponse = await fetch(`http://localhost:8080/api/messages/${user.id}`);
+          const messagesData = await messagesResponse.json();
+          return {
+            ...user,
+            messages: messagesData
+          };
         }));
-  
-        setPeople(peopleWithMessages);
+
+        setPeople(usersWithMessages);
       } catch (error) {
-        console.error('Fetch error:', error);
         setError(error.message);
       }
     };
-  
-    fetchData();
+
+    fetchPeopleAndMessages();
   }, []);
-  
+
+  const handlePostMessage = async (userId, text) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ person_id: userId, text }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post message');
+      }
+
+      const newMessage = await response.json();
+      
+      // After posting the message, update the user's messages locally
+      setPeople((prevPeople) =>
+        prevPeople.map((user) =>
+          user.id === userId
+            ? { ...user, messages: [...user.messages, newMessage] }
+            : user
+        )
+      );
+    } catch (error) {
+      console.error('Post message error:', error);
+    }
+  };
 
   return (
     <div className="App">
       <h1>Green Apron Board</h1>
       {error && <p>Error: {error}</p>}
-      <ApronCard people={people} />
+      <ApronCard people={people} onPostMessage={handlePostMessage} />
     </div>
   );
 }

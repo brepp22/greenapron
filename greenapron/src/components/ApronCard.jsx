@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import './ApronCard.css';
 
-const ApronCard = ({ people }) => {
-  const [messages, setMessages] = useState({});
+const ApronCard = ({ people, onPostMessage }) => {
   const [inputs, setInputs] = useState({});
 
-  const handlePost = (index) => {
+  const handlePost = (userId, index) => {
     const text = inputs[index] || '';
     if (!text.trim()) return;
 
-    setMessages((prev) => ({
-      ...prev,
-      [index]: [...(prev[index] || []), text],
-    }));
+    if (typeof onPostMessage === 'function') {
+      onPostMessage(userId, text);
+    }
 
     setInputs((prev) => ({
       ...prev,
@@ -30,15 +28,19 @@ const ApronCard = ({ people }) => {
   return (
     <div className="board">
       {people.map((person, index) => (
-        <div className="person-container" key={index}>
+        <div className="person-container" key={person.id}>
           {person.image && <img src={person.image} alt={person.name} />}
           <h3>{person.name}</h3>
           <p>{person.role}</p>
 
           <div className="messages">
-            {(messages[index] || []).map((msg, i) => (
-              <p key={i} className="message">{msg}</p>
-            ))}
+            {person.messages && person.messages.length > 0 ? (
+              person.messages.map((msg, i) => (
+                <p key={msg.id || i} className="message">{msg.text}</p>
+              ))
+            ) : (
+              <p className="message">No messages yet.</p>
+            )}
           </div>
 
           <input
@@ -47,7 +49,7 @@ const ApronCard = ({ people }) => {
             value={inputs[index] || ''}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
-          <button onClick={() => handlePost(index)}>Post</button>
+          <button onClick={() => handlePost(person.id, index)}>Post</button>
         </div>
       ))}
     </div>
