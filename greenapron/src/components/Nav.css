@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.nav-logo:hover{
+    color:black;
+}
+
 .nav-links {
     font-family: monospace;
     font-size: 16px; 
