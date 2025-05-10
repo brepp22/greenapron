@@ -5,8 +5,18 @@
     margin: 20px;
     border-radius: 15px;
     padding: 5px 5px 15px;
+    font-family: monospace;
 }
 
 .board{
     display: flex;
+    justify-content: center;
+}
+
+.input{
+    font-family: monospace;
+}
+
+.button{
+    font-family:monospace;
 }

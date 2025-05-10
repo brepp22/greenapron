@@ -44,12 +44,13 @@ const ApronCard = ({ people, onPostMessage }) => {
           </div>
 
           <input
+            className="input"
             type="text"
             placeholder="Leave a message"
             value={inputs[index] || ''}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
-          <button onClick={() => handlePost(person.id, index)}>Post</button>
+          <button className="button" onClick={() => handlePost(person.id, index)}>Post</button>
         </div>
       ))}
     </div>
