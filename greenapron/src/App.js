@@ -66,11 +66,13 @@ function App() {
   };
 
   return (
+    
     <div className="App">
       <h1>Green Apron Board</h1>
       {error && <p>Error: {error}</p>}
       <ApronCard people={people} onPostMessage={handlePostMessage} />
     </div>
+   
   );
 }
 
