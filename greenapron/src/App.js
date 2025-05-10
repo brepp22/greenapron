@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ApronCard from './components/ApronCard';
 import './App.css';
+import Nav from './components/Nav';
 
 
 
@@ -64,16 +66,24 @@ function App() {
       console.error('Post message error:', error);
     }
   };
-
   return (
-    
-    <div className="App">
-      <h1>Green Apron Board</h1>
-      {error && <p>Error: {error}</p>}
-      <ApronCard people={people} onPostMessage={handlePostMessage} />
-    </div>
-   
+    <>
+      <Nav />
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <div className="App">
+              <h1>Green Apron Board</h1>
+              {error && <p>Error: {error}</p>}
+              <ApronCard people={people} onPostMessage={handlePostMessage} />
+            </div>
+          } 
+        />
+      </Routes>
+    </>
   );
+  
 }
 
 export default App;
