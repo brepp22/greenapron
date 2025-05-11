@@ -4,15 +4,24 @@
  */
 // seeds/20230427000000_users_seed.js
 
-exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('users')
-    .del()
-    .then(function () {
-      // Inserts seed entries
-      return knex('users').insert([
-        { name: 'John Doe', email: 'john.doe@example.com', password: 'password123' },
-        { name: 'Jane Smith', email: 'jane.smith@example.com', password: 'password456' },
-      ]);
-    });
+const bcrypt = require('bcryptjs');
+
+exports.seed = async function(knex) {
+  await knex('users').del();
+
+  const users = [
+    {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      password: await bcrypt.hash('password123', 8)
+    },
+    {
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      password: await bcrypt.hash('password456', 8)
+    }
+  ];
+
+  return knex('users').insert(users);
 };
+

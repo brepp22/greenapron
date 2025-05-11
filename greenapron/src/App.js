@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate} from 'react-router-dom';
 import ApronCard from './components/ApronCard';
+import LoginForm from './components/LoginForm';
 import './App.css';
 import Nav from './components/Nav';
 
@@ -10,7 +11,12 @@ function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
 
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
+
+    if(!token) return ; 
+
     const fetchPeopleAndMessages = async () => {
       try {
         const usersResponse = await fetch('http://localhost:8080/api/users');
@@ -36,7 +42,7 @@ function App() {
     };
 
     fetchPeopleAndMessages();
-  }, []);
+  }, [token]);
 
   const handlePostMessage = async (userId, text) => {
     try {
@@ -66,28 +72,34 @@ function App() {
       console.error('Post message error:', error);
     }
   };
+
   return (
     <>
       <Nav />
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+
+        <Route path="/login" element={<LoginForm />} />
 
         <Route 
-          path="/"
-          />
-        <Route 
-          path="/board" 
+          path="/board"
           element={
-            <div className="App">
-              <h1>Green Apron Board</h1>
-              {error && <p>Error: {error}</p>}
-              <ApronCard people={people} onPostMessage={handlePostMessage} />
-            </div>
-          } 
+            token ? (
+              <div className="App">
+                <h1>Green Apron Board</h1>
+                {error && <p>Error: {error}</p>}
+                <ApronCard people={people} onPostMessage={handlePostMessage} />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
+
       </Routes>
-    </>
+      </>
+   
   );
-  
 }
 
 export default App;
