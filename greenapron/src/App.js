@@ -70,8 +70,12 @@ function App() {
     <>
       <Nav />
       <Routes>
+
         <Route 
-          path="/" 
+          path="/"
+          />
+        <Route 
+          path="/board" 
           element={
             <div className="App">
               <h1>Green Apron Board</h1>
