@@ -30,6 +30,7 @@ const LoginForm = () => {
       <h2>Login</h2>
 
       <input
+        className="input-email"
         type="email"
         name="email"
         placeholder="Email"
@@ -39,6 +40,7 @@ const LoginForm = () => {
       /><br />
 
       <input
+        className="input-password"
         type="password"
         name="password"
         placeholder="Password"
@@ -47,8 +49,8 @@ const LoginForm = () => {
         required
       /><br />
 
-      <button type="submit">Login</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button className='login-button' type="submit">Login</button>
+      {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
     </form>
   );
 };

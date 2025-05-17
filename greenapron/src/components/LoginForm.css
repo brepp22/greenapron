@@ -1,3 +1,52 @@
-body{
+/* Center the login form on the page */
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+    font-family: monospace;
+  }
+  
+  /* Email and password inputs */
+  .input-email,
+  .input-password {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: monospace;
+  }
+  
+  
+  .login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: monospace;
+  }
+  
+  .login-button:hover {
+    background-color: #45a049;
+  }
+  
+  
+  .error-message {
     color: red;
-}
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  
