@@ -25,6 +25,11 @@ const ApronCard = ({ people, onPostMessage }) => {
     }));
   };
 
+  // 🛡️ Add this guard:
+  if (!Array.isArray(people)) {
+    return <p>Loading board...</p>;
+  }
+
   return (
     <div className="board">
       {people.map((person, index) => (
@@ -56,5 +61,6 @@ const ApronCard = ({ people, onPostMessage }) => {
     </div>
   );
 };
+
 
 export default ApronCard;

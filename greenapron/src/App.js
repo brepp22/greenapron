@@ -78,30 +78,28 @@ function App() {
   return (
     <>
       <Nav />
+    
       <Routes>
+  <Route path="/" element={<Landing />} />
+  <Route path="/login" element={<LoginForm />} />
+  <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
+  
+  <Route 
+    path="/board"
+    element={
+      token ? (
+        <div className="App">
+          <h1>Green Apron Board</h1>
+          {error && <p>Error: {error}</p>}
+          <ApronCard people={people || []} onPostMessage={handlePostMessage} />
+        </div>
+      ) : (
+        <Navigate to="/login" />
+      )
+    }
+  />
+</Routes>
 
-        <Route path="/" element={<Landing />} />
-
-        <Route path="/login" element={<LoginForm />} />
-
-        <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
-
-        <Route 
-          path="/board"
-          element={
-            token ? (
-              <div className="App">
-                <h1>Green Apron Board</h1>
-                {error && <p>Error: {error}</p>}
-                <ApronCard people={people} onPostMessage={handlePostMessage} />
-              </div>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-
-      </Routes>
       </>
    
   );

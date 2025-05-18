@@ -6,9 +6,6 @@ async function createUser(user) {
   return db('users').where({id}).first();
 }
 
-// function findById(id) {
-//   return db('users').where({ id }).first();
-// }
 
 function findByEmail(email) {
   return db('users').where({email}).first();

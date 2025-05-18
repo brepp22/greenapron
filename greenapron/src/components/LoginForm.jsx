@@ -16,8 +16,10 @@ const LoginForm = () => {
     e.preventDefault();
     setError('');
 
+
     try {
       const res = await axios.post('http://localhost:8080/api/users/login', form);
+      console.log('Login success, token:', res.data.token); // Add this
       localStorage.setItem('token', res.data.token);
       navigate('/board'); // redirect after login
     } catch (err) {
