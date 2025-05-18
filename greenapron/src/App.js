@@ -3,6 +3,7 @@ import { Route, Routes, Navigate} from 'react-router-dom';
 import ApronCard from './components/ApronCard';
 import LoginForm from './components/LoginForm';
 import Landing from './components/Landing';
+import Profile from './components/Profile';
 import './App.css';
 import Nav from './components/Nav';
 
@@ -82,6 +83,8 @@ function App() {
         <Route path="/" element={<Landing />} />
 
         <Route path="/login" element={<LoginForm />} />
+
+        <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
 
         <Route 
           path="/board"
