@@ -1,20 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './LandingPage.css';
+import './Landing.css';
 
 const Landing = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/board'); // or wherever you want to take the user
+    navigate('/board'); 
   };
 
   return (
     <div className="landing-container">
       <header className="landing-header">
-        <h1>Green Apron Board</h1>
+        <h1>Welcome to Your Virtual Green Apron Board</h1>
         <p></p>
-        <button className="cta-button" onClick={handleGetStarted}>
+        <button className="start-button" onClick={handleGetStarted}>
           Get Started
         </button>
       </header>
