@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate} from 'react-router-dom';
 import ApronCard from './components/ApronCard';
 import LoginForm from './components/LoginForm';
+import Landing from './components/Landing';
 import './App.css';
 import Nav from './components/Nav';
 
@@ -77,7 +78,8 @@ function App() {
     <>
       <Nav />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+
+        <Route path="/" element={<Landing />} />
 
         <Route path="/login" element={<LoginForm />} />
 
