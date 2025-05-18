@@ -16,7 +16,7 @@ const Profile = () => {
 
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/users`, {
+        const res = await fetch(`http://localhost:8080/api/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

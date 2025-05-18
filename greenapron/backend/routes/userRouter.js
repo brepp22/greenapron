@@ -7,6 +7,10 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret-dev-key'; //move to .env before production 
 
+const restricted = require('../../src/middleware/restricted');
+
+
+
 function generateToken(user){
   return jwt.sign(
     {id: user.id , email: user.email},
@@ -64,6 +68,18 @@ router.post('/login', async (req, res) => {
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+router.get('/profile', restricted, async (req, res) => {
+  try {
+    const user = await Users.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const safeUser = { id: user.id, name: user.name, email: user.email };
+    res.json(safeUser);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }

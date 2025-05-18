@@ -18,8 +18,13 @@ function getAllUsers() {
   return db('users');  
 }
 
+function findById(id) {
+  return db('users').where({ id }).first();
+}
+
 module.exports = {
   createUser,
   findByEmail,
-  getAllUsers  
+  getAllUsers,
+  findById 
 };
