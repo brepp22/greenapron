@@ -12,8 +12,7 @@ import Nav from './components/Nav';
 function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
-
-  const token = localStorage.getItem('token');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
 
@@ -77,11 +76,11 @@ function App() {
 
   return (
     <>
-      <Nav />
+      <Nav token={token} setToken={setToken}/>
     
       <Routes>
   <Route path="/" element={<Landing />} />
-  <Route path="/login" element={<LoginForm />} />
+  <Route path="/login" element={<LoginForm setToken={setToken}/> } />
   <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
   
   <Route 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './LoginForm.css';
 
-const LoginForm = () => {
+const LoginForm = ({setToken}) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -19,9 +19,10 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post('http://localhost:8080/api/users/login', form);
-      console.log('Login success, token:', res.data.token); // Add this
+      console.log('Login success, token:', res.data.token); 
       localStorage.setItem('token', res.data.token);
-      navigate('/board'); // redirect after login
+      setToken(res.data.token); 
+      navigate('/board'); 
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
