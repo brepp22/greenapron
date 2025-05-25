@@ -16,6 +16,8 @@ const Nav = ({ token, setToken }) => {
     navigate('/');
   };
 
+  console.log('Nav render. Token:', token)
+
   return (
     <nav className="nav-bar">
       <div className="nav-logo" onClick={toggleDropdown}>

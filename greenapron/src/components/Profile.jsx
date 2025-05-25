@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+const Profile = ({token, setToken}) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (!token) {
@@ -34,10 +33,10 @@ const Profile = () => {
     fetchUserData();
   }, [token, navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   navigate('/');
+  // };
 
   if (!user) return <p>Loading...</p>;
 
@@ -45,7 +44,7 @@ const Profile = () => {
     <div className="profile-container">
       <h2>Welcome, {user.name || user.username}</h2>
       <p>Email: {user.email}</p>
-      <button onClick={handleLogout}>Logout</button>
+      {/* <button type='button' onClick={handleLogout}>Logout</button> */}
     </div>
   );
 };

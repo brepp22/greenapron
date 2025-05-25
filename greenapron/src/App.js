@@ -81,7 +81,10 @@ function App() {
       <Routes>
   <Route path="/" element={<Landing />} />
   <Route path="/login" element={<LoginForm setToken={setToken}/> } />
-  <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
+<Route
+  path="/profile"
+  element={token ? <Profile token={token} setToken={setToken} /> : <Navigate to="/login" />}
+/>
   
   <Route 
     path="/board"
