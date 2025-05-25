@@ -14,7 +14,8 @@
   
   /* Email and password inputs */
   .input-email,
-  .input-password {
+  .input-password,
+  .input-register {
     width: 100%;
     padding: 10px 12px;
     margin-bottom: 16px;

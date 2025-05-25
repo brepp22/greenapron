@@ -21,9 +21,13 @@ const LoginForm = ({setToken}) => {
       'http://localhost:8080/api/users/register' :
       'http://localhost:8080/api/users/login';
 
+    const payload = isRegister ?
+      form :
+      {email:form.email , password:form.password};
+
 
     try {
-      const res = await axios.post(endpoint, form);
+      const res = await axios.post(endpoint, payload);
       console.log(`${isRegister ? 'Registration' : 'Login'}`, res.data.token); 
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token); 
@@ -36,6 +40,18 @@ const LoginForm = ({setToken}) => {
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <h2>{isRegister ? 'Register' : 'Login'}</h2>
+
+       {isRegister && (
+        <input
+          className='input-register'
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+        />
+      )}
 
       <input
         className="input-email"
