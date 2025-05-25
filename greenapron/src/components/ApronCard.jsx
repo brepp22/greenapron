@@ -8,8 +8,6 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
     const text = inputs[index] || '';
     if (!text.trim()) return;
 
-    const person = people[index];
-
     if (typeof onPostMessage === 'function') {
       onPostMessage(userId, text, authorName);
     }
@@ -27,7 +25,6 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
     }));
   };
 
-
   if (!Array.isArray(people)) {
     return <p>Loading board...</p>;
   }
@@ -41,9 +38,11 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
           <p>{person.role}</p>
 
           <div className="messages">
-            {person.messages && person.messages.length > 0 ? (
-              person.messages.map((msg, i) => (
-                <p key={msg.name || i} className="message">{msg.text}</p>
+            {(person.messages ?? []).length > 0 ? (
+              (person.messages ?? []).map((msg, i) => (
+                <p key={msg.id || i} className="message">
+                  <strong>{msg.name || 'Anonymous'}</strong>: {msg.text}
+                </p>
               ))
             ) : (
               <p className="message">No messages yet.</p>
@@ -57,12 +56,13 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
             value={inputs[index] || ''}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
-          <button className="button" onClick={() => handlePost(person.id, index)}>Post</button>
+          <button className="button" onClick={() => handlePost(person.id, index)}>
+            Post
+          </button>
         </div>
       ))}
     </div>
   );
 };
-
 
 export default ApronCard;

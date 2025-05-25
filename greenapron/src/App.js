@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, Navigate} from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import ApronCard from './components/ApronCard';
 import LoginForm from './components/LoginForm';
 import Landing from './components/Landing';
@@ -7,16 +7,40 @@ import Profile from './components/Profile';
 import './App.css';
 import Nav from './components/Nav';
 
-
-
 function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
+  const [authorName, setAuthorName] = useState(''); // Store logged-in user’s name
+
+  // Fetch logged-in user info for authorName (adjust URL or logic as needed)
+  useEffect(() => {
+    if (!token) {
+      setAuthorName('');
+      return;
+    }
+
+    const fetchLoggedInUser = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/api/profile', { // Endpoint to get logged-in user info
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!res.ok) throw new Error('Failed to fetch logged-in user');
+        const data = await res.json();
+        setAuthorName(data.name); // Assuming user data has a "name" field
+      } catch (err) {
+        console.error(err);
+        setAuthorName('');
+      }
+    };
+
+    fetchLoggedInUser();
+  }, [token]);
 
   useEffect(() => {
-
-    if(!token) return ; 
+    if (!token) return;
 
     const fetchPeopleAndMessages = async () => {
       try {
@@ -26,15 +50,17 @@ function App() {
         }
         const usersData = await usersResponse.json();
 
-        // Fetch messages for each user
-        const usersWithMessages = await Promise.all(usersData.map(async (user) => {
-          const messagesResponse = await fetch(`http://localhost:8080/api/messages/${user.id}`);
-          const messagesData = await messagesResponse.json();
-          return {
-            ...user,
-            messages: messagesData
-          };
-        }));
+        // Fetch messages for each user and ensure messages is always an array
+        const usersWithMessages = await Promise.all(
+          usersData.map(async (user) => {
+            const messagesResponse = await fetch(`http://localhost:8080/api/messages/${user.id}`);
+            const messagesData = messagesResponse.ok ? await messagesResponse.json() : [];
+            return {
+              ...user,
+              messages: Array.isArray(messagesData) ? messagesData : [],
+            };
+          })
+        );
 
         setPeople(usersWithMessages);
       } catch (error) {
@@ -52,7 +78,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ person_id: userId, text }),
+        body: JSON.stringify({ person_id: userId, text, name }), // Include `name` in payload if backend supports it
       });
 
       if (!response.ok) {
@@ -60,15 +86,12 @@ function App() {
       }
 
       const newMessage = await response.json();
-      console.log('Message posted:' , newMessage, 'From', name);
+      const messageWithName = { ...newMessage, name };
 
-      const messageWithName = {...newMessage , name};
-      
-      // After posting the message, update the user's messages locally
       setPeople((prevPeople) =>
         prevPeople.map((user) =>
           user.id === userId
-            ? { ...user, messages: [...user.messages, messageWithName] }
+            ? { ...user, messages: [...(user.messages || []), messageWithName] }
             : user
         )
       );
@@ -79,34 +102,31 @@ function App() {
 
   return (
     <>
-      <Nav token={token} setToken={setToken}/>
-    
-      <Routes>
-  <Route path="/" element={<Landing />} />
-  <Route path="/login" element={<LoginForm setToken={setToken}/> } />
-<Route
-  path="/profile"
-  element={token ? <Profile token={token} setToken={setToken} /> : <Navigate to="/login" />}
-/>
-  
-  <Route 
-    path="/board"
-    element={
-      token ? (
-        <div className="App">
-          <h1>Green Apron Board</h1>
-          {error && <p>Error: {error}</p>}
-          <ApronCard people={people || []} onPostMessage={handlePostMessage} />
-        </div>
-      ) : (
-        <Navigate to="/login" />
-      )
-    }
-  />
-</Routes>
+      <Nav token={token} setToken={setToken} />
 
-      </>
-   
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<LoginForm setToken={setToken} />} />
+        <Route
+          path="/profile"
+          element={token ? <Profile token={token} setToken={setToken} /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/board"
+          element={
+            token ? (
+              <div className="App">
+                <h1>Green Apron Board</h1>
+                {error && <p>Error: {error}</p>}
+                <ApronCard people={people || []} onPostMessage={handlePostMessage} authorName={authorName} />
+              </div>
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
