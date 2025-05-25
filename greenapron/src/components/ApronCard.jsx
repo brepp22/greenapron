@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './ApronCard.css';
 
-const ApronCard = ({ people, onPostMessage }) => {
+const ApronCard = ({ people, onPostMessage, authorName }) => {
   const [inputs, setInputs] = useState({});
 
   const handlePost = (userId, index) => {
     const text = inputs[index] || '';
     if (!text.trim()) return;
 
+    const person = people[index];
+
     if (typeof onPostMessage === 'function') {
-      onPostMessage(userId, text);
+      onPostMessage(userId, text, authorName);
     }
 
     setInputs((prev) => ({
@@ -25,7 +27,7 @@ const ApronCard = ({ people, onPostMessage }) => {
     }));
   };
 
-  // 🛡️ Add this guard:
+
   if (!Array.isArray(people)) {
     return <p>Loading board...</p>;
   }
@@ -41,7 +43,7 @@ const ApronCard = ({ people, onPostMessage }) => {
           <div className="messages">
             {person.messages && person.messages.length > 0 ? (
               person.messages.map((msg, i) => (
-                <p key={msg.id || i} className="message">{msg.text}</p>
+                <p key={msg.name || i} className="message">{msg.text}</p>
               ))
             ) : (
               <p className="message">No messages yet.</p>

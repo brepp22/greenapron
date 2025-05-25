@@ -45,7 +45,7 @@ function App() {
     fetchPeopleAndMessages();
   }, [token]);
 
-  const handlePostMessage = async (userId, text) => {
+  const handlePostMessage = async (userId, text, name) => {
     try {
       const response = await fetch('http://localhost:8080/api/messages', {
         method: 'POST',
@@ -60,12 +60,15 @@ function App() {
       }
 
       const newMessage = await response.json();
+      console.log('Message posted:' , newMessage, 'From', name);
+
+      const messageWithName = {...newMessage , name};
       
       // After posting the message, update the user's messages locally
       setPeople((prevPeople) =>
         prevPeople.map((user) =>
           user.id === userId
-            ? { ...user, messages: [...user.messages, newMessage] }
+            ? { ...user, messages: [...user.messages, messageWithName] }
             : user
         )
       );
