@@ -2,18 +2,31 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = function(knex) {
-  return knex.schema.alterTable('messages', (table) => {
-    table.string('name'); 
+// 20250530215319_add_author_to_messages.js
+exports.up = async function(knex) {
+  // First: add the new column
+  await knex.schema.alterTable('messages', (table) => {
+    table.integer('author_id')
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      .onDelete('SET NULL');
+  });
+
+  // Second: rename the column separately
+  await knex.schema.alterTable('messages', (table) => {
+    table.renameColumn('person_id', 'board_owner_id');
   });
 };
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = function(knex) {
-  return knex.schema.alterTable('messages', (table) => {
-    table.dropColumn('name');
+exports.down = async function(knex) {
+  // First: rename the column back
+  await knex.schema.alterTable('messages', (table) => {
+    table.renameColumn('board_owner_id', 'person_id');
+  });
+
+  // Second: drop the column
+  await knex.schema.alterTable('messages', (table) => {
+    table.dropColumn('author_id');
   });
 };

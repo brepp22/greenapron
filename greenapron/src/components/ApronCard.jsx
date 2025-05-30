@@ -5,7 +5,7 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
   const [inputs, setInputs] = useState({});
   const [expand, setExpand] = useState({});
 
-  const handlePost = (userId, index) => {
+  const handlePost = (userId, index, authorName) => {
     const text = inputs[index] || '';
     if (!text.trim()) return;
 
@@ -54,7 +54,7 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
             {visibleMessages.length > 0 ? (
               visibleMessages.map((msg, i) => (
                 <p key={msg.id || i} className="message">
-                  <strong>{msg.name || 'Anonymous'}</strong>: {msg.text}
+                  <strong>{msg.author_name || 'Anonymous'}</strong>: {msg.text}
                 </p>
               ))
             ) : (
