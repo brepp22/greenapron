@@ -3,6 +3,7 @@ import './ApronCard.css';
 
 const ApronCard = ({ people, onPostMessage, authorName }) => {
   const [inputs, setInputs] = useState({});
+  const [expand, setExpand] = useState({});
 
   const handlePost = (userId, index) => {
     const text = inputs[index] || '';
@@ -25,27 +26,44 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
     }));
   };
 
+  const handleExpand = (personId) => {
+    setExpand((prev) => ({
+      ...prev,
+      [personId] : !prev[personId],
+    }));
+  }
+
   if (!Array.isArray(people)) {
     return <p>Loading board...</p>;
   }
 
   return (
     <div className="board">
-      {people.map((person, index) => (
+      {people.map((person, index) => {
+        const isExpand = expand[person.id];
+        const messages = person.messages ?? [];
+        const visibleMessages = isExpand ? messages : messages.slice(0, 3);
+        
+        return (
         <div className="person-container" key={person.id}>
           {person.image && <img src={person.image} alt={person.name} />}
           <h3>{person.name}</h3>
           <p>{person.role}</p>
 
           <div className="messages">
-            {(person.messages ?? []).length > 0 ? (
-              (person.messages ?? []).map((msg, i) => (
+            {visibleMessages.length > 0 ? (
+              visibleMessages.map((msg, i) => (
                 <p key={msg.id || i} className="message">
                   <strong>{msg.name || 'Anonymous'}</strong>: {msg.text}
                 </p>
               ))
             ) : (
               <p className="message">No messages yet.</p>
+            )}
+            {messages.length > 3 && (
+              <button className='message-toggle' onClick={() => handleExpand(person.id)}>
+                {isExpand ? 'Show Less' : 'View All Messages'}
+              </button>
             )}
           </div>
 
@@ -60,7 +78,8 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
             Post
           </button>
         </div>
-      ))}
+      );
+    })}
     </div>
   );
 };

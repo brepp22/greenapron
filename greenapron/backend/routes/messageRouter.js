@@ -4,8 +4,9 @@ const Message = require('../models/messages');
 
 
 router.get('/', async (req, res) => {
+  const limit= req.query.limit || 3;
   try {
-    const messages = await Message.getAllMessages();
+    const messages = await Message.getAllMessages(limit);
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });

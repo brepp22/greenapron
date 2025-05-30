@@ -2,18 +2,24 @@
 const db = require('../db');
 
 
-function getAllMessages() {
-  return db('messages')
+function getAllMessages(limit=3) {
+  let query = db('messages')
     .join('users', 'messages.person_id', '=', 'users.id') 
-    .select('messages.id', 'messages.text', 'messages.created_at', 'users.name', 'users.email') // Select fields from both tables
+    .select('messages.id', 'messages.text', 'messages.created_at', 'users.name', 'users.email') 
     .orderBy('messages.created_at', 'desc');
+
+    if(limit !== 'all'){
+      query = query.limit(Number(limit));
+    }
+
+    return query;
 }
 
 
 function getMessagesByPersonId(person_id) {
   return db('messages')
     .join('users', 'messages.person_id', '=', 'users.id')
-    .select('messages.id', 'messages.text', 'messages.created_at', 'users.name', 'users.email') // Select fields from both tables
+    .select('messages.id', 'messages.text', 'messages.created_at', 'users.name', 'users.email')
     .where('messages.person_id', person_id)
     .orderBy('messages.created_at', 'desc');
 }
