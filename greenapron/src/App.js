@@ -11,9 +11,9 @@ function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [authorName, setAuthorName] = useState(''); // Store logged-in user’s name
+  const [authorName, setAuthorName] = useState('');
 
-  // Fetch logged-in user info for authorName (adjust URL or logic as needed)
+  
   useEffect(() => {
     if (!token) {
       setAuthorName('');
@@ -22,14 +22,14 @@ function App() {
 
     const fetchLoggedInUser = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/profile', { // Endpoint to get logged-in user info
+        const res = await fetch('http://localhost:8080/api/profile', { 
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         if (!res.ok) throw new Error('Failed to fetch logged-in user');
         const data = await res.json();
-        setAuthorName(data.name); // Assuming user data has a "name" field
+        setAuthorName(data.name); 
       } catch (err) {
         console.error(err);
         setAuthorName('');
@@ -50,7 +50,6 @@ function App() {
         }
         const usersData = await usersResponse.json();
 
-        // Fetch messages for each user and ensure messages is always an array
         const usersWithMessages = await Promise.all(
           usersData.map(async (user) => {
             const messagesResponse = await fetch(`http://localhost:8080/api/messages/${user.id}`);
@@ -78,7 +77,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ person_id: userId, text, name }), // Include `name` in payload if backend supports it
+        body: JSON.stringify({ person_id: userId, text, name }), 
       });
 
       if (!response.ok) {

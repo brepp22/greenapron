@@ -28,14 +28,14 @@ router.get('/:id', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-  const { person_id, text } = req.body;
+  const { person_id, text, name } = req.body;
 
-  if (!person_id || !text) {
-    return res.status(400).json({ message: 'Missing required fields: person_id and text' });
+  if (!person_id || !text || !name) {
+    return res.status(400).json({ message: 'Missing required fields: person_id text and name' });
   }
 
   try {
-    const newMessage = await Message.createMessage({ person_id, text });
+    const newMessage = await Message.createMessage({ person_id, text, name });
     res.status(201).json(newMessage);
   } catch (err) {
     console.error('Error inserting message:', err);
