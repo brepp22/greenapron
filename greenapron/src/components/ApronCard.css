@@ -1,22 +1,99 @@
+/* General font for the app */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
 .person-container {
-    background: white;
-    height: 220px;
-    width: 420px;
-    margin: 20px;
-    border-radius: 15px;
-    padding: 5px 5px 15px;
-    font-family: monospace;
+  background: #ffffff;
+  width: 420px;
+  min-height: 240px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.board{
-    display: flex;
-    justify-content: center;
+.person-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
-.input{
-    font-family: monospace;
+.person-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.button{
-    font-family:monospace;
+.person-container h3 {
+  margin: 10px 0 5px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.person-container p {
+  margin: 4px 0;
+  color: #555;
+}
+
+.messages {
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+.message {
+  background-color: #f1f3f5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+.message-toggle {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.input {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #218838;
 }
