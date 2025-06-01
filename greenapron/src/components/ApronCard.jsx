@@ -42,7 +42,7 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
       {people.map((person, index) => {
         const isExpand = expand[person.id];
         const messages = person.messages ?? [];
-        const visibleMessages = isExpand ? messages : messages.slice(-3);
+        const visibleMessages = isExpand ? messages : messages.slice(0,3);
         
         return (
         <div className="person-container" key={person.id}>

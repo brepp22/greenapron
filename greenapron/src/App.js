@@ -11,7 +11,6 @@ function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  //const [authorName, setAuthorName] = useState('');
   const [authorName, setAuthorName] = useState({ id: '', name: '' });
 
 
@@ -95,7 +94,7 @@ function App() {
       setPeople((prevPeople) =>
         prevPeople.map((user) =>
           user.id === boardOwnerId
-            ? { ...user, messages: [...(user.messages || []), messageWithName] }
+            ? { ...user, messages: [messageWithName, ...(user.messages || [])] }
             : user
         )
       );
