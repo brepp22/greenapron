@@ -11,7 +11,9 @@ function App() {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [authorName, setAuthorName] = useState('');
+  //const [authorName, setAuthorName] = useState('');
+  const [authorName, setAuthorName] = useState({ id: '', name: '' });
+
 
   
   useEffect(() => {
@@ -29,7 +31,7 @@ function App() {
         });
         if (!res.ok) throw new Error('Failed to fetch logged-in user');
         const data = await res.json();
-        setAuthorName(data.name); 
+        setAuthorName({id: data.id , name: data.name}); 
       } catch (err) {
         console.error(err);
         setAuthorName('');
@@ -70,26 +72,29 @@ function App() {
     fetchPeopleAndMessages();
   }, [token]);
 
-  const handlePostMessage = async (userId, text, name) => {
+  const handlePostMessage = async (boardOwnerId, text, authorId) => {
     try {
       const response = await fetch('http://localhost:8080/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization : `Bearer${token}`,
         },
-        body: JSON.stringify({ person_id: userId, text, name }), 
+        body: JSON.stringify({ board_owner_id: boardOwnerId, text, author_id: authorId }), 
       });
 
       if (!response.ok) {
+        const errorBody = await response.text();
+        console.log(errorBody)
         throw new Error('Failed to post message');
       }
 
       const newMessage = await response.json();
-      const messageWithName = { ...newMessage, name };
+      const messageWithName = { ...newMessage, boardOwnerId };
 
       setPeople((prevPeople) =>
         prevPeople.map((user) =>
-          user.id === userId
+          user.id === boardOwnerId
             ? { ...user, messages: [...(user.messages || []), messageWithName] }
             : user
         )

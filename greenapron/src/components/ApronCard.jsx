@@ -10,7 +10,7 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
     if (!text.trim()) return;
 
     if (typeof onPostMessage === 'function') {
-      onPostMessage(userId, text, authorName);
+      onPostMessage(userId, text, authorName.id);
     }
 
     setInputs((prev) => ({
@@ -74,7 +74,7 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
             value={inputs[index] || ''}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
-          <button className="button" onClick={() => handlePost(person.id, index)}>
+          <button className="button" onClick={() => handlePost(person.id, index, authorName)}>
             Post
           </button>
         </div>
