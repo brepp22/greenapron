@@ -4,10 +4,13 @@ import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = ({setToken}) => {
-  const [form, setForm] = useState({ partner_number: '', password: '' });
+  const [form, setForm] = useState({ partner_number: '', password: '', role: '', });
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState('');
   const navigate = useNavigate();
+
+  const roleOptions = ['Barista', 'Shift Supervisor', 'Store Manager'];
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -72,6 +75,24 @@ const LoginForm = ({setToken}) => {
         onChange={handleChange}
         required
       /><br />
+
+      <p>Select Your Role:</p>
+
+      {roleOptions.map((role) => (
+      <label key={role} style={{ display: 'block' }}>
+      <input
+        className = "input-role"
+        type="radio"
+        name="role"
+        value={role}
+        checked={form.role === role}
+        onChange={handleChange}
+      />
+      {role}
+    </label>
+  ))}
+    <br />
+
 
       <button className='login-button' type="submit">{isRegister ? 'Register' : 'Login'}</button>
       {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
