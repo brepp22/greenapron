@@ -45,6 +45,7 @@ const LoginForm = ({setToken}) => {
       <h2>{isRegister ? 'Register' : 'Login'}</h2>
 
        {isRegister && (
+        <>
         <input
           className='input-register'
           type="text"
@@ -54,6 +55,25 @@ const LoginForm = ({setToken}) => {
           onChange={handleChange}
           required
         />
+
+  <div className="role-section">
+    <p>Choose Your Role</p>
+    {roleOptions.map((role) => (
+      <label key={role} className="role-option">
+        <input
+          className="input-role"
+          type="radio"
+          name="role"
+          value={role}
+          checked={form.role === role}
+          onChange={handleChange}
+        />
+        {role}
+      </label>
+    ))}
+  </div>
+</>
+
       )}
 
       <input
@@ -76,22 +96,7 @@ const LoginForm = ({setToken}) => {
         required
       /><br />
 
-      <p>Select Your Role:</p>
-
-      {roleOptions.map((role) => (
-      <label key={role} style={{ display: 'block' }}>
-      <input
-        className = "input-role"
-        type="radio"
-        name="role"
-        value={role}
-        checked={form.role === role}
-        onChange={handleChange}
-      />
-      {role}
-    </label>
-  ))}
-    <br />
+     
 
 
       <button className='login-button' type="submit">{isRegister ? 'Register' : 'Login'}</button>

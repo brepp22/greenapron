@@ -35,16 +35,16 @@ router.get('/', async (req, res) => {
 
 /**  POST /api/users/register  – create account */
 router.post('/register', async (req, res) => {
-  const { name, partner_number, password } = req.body;
-  if (!name || !partner_number || !password)
+  const { name, partner_number, password, role } = req.body;
+  if (!name || !partner_number || !password || !role)
     return res.status(400).json({ message: 'Missing required fields' });
 
   try {
     const hash     = bcrypt.hashSync(password, 10);
-    const newUser  = await Users.createUser({ name, partner_number, password: hash });
+    const newUser  = await Users.createUser({ name, partner_number, password: hash, role });
     const token    = generateToken(newUser);
 
-    res.status(201).json({ id: newUser.id, name, partner_number, token });
+    res.status(201).json({ id: newUser.id, name, partner_number, role, token });
   } catch (err) {
     if (err.code === 'SQLITE_CONSTRAINT') {
       res.status(409).json({ message: 'Partner Number already exists' });
