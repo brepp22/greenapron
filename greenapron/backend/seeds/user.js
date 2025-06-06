@@ -13,11 +13,13 @@ exports.seed = async function(knex) {
     {
       name: 'John Doe',
       email: 'john.doe@example.com',
+      role: 'Barista',
       password: await bcrypt.hash('starbucks123', 8)
     },
     {
       name: 'Jane Smith',
       email: 'jane.smith@example.com',
+      role: 'Shift Supervisor',
       password: await bcrypt.hash('password456', 8)
     }
   ];
