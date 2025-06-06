@@ -26,7 +26,7 @@ function generateToken(user){
 router.get('/', async (req, res) => {
   try {
     const users = await Users.getAllUsers();
-    const safe  = users.map(u => ({ id: u.id, name: u.name, email: u.email }));
+    const safe  = users.map(u => ({ id: u.id, name: u.name, email: u.email, role: u.role }));
     res.json(safe);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
