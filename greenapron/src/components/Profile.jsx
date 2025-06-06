@@ -34,17 +34,12 @@ const Profile = ({token, setToken}) => {
     fetchUserData();
   }, [token, navigate]);
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   navigate('/');
-  // };
-
   if (!user) return <p>Loading...</p>;
 
   return (
     <div className="profile-container">
       <h2>Welcome, {user.name || user.username}</h2>
-      <p>Email: {user.email}</p>
+      <p>Parnter Number: {user.partner_number}</p>
       {/* <button type='button' onClick={handleLogout}>Logout</button> */}
     </div>
   );

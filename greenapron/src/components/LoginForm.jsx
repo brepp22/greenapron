@@ -4,7 +4,7 @@ import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = ({setToken}) => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ partner_number: '', password: '' });
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState('');
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const LoginForm = ({setToken}) => {
 
     const payload = isRegister ?
       form :
-      {email:form.email , password:form.password};
+      {partner_number:form.partner_number , password:form.password};
 
 
     try {
@@ -55,10 +55,10 @@ const LoginForm = ({setToken}) => {
 
       <input
         className="input-email"
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
+        type="text"
+        name="partner_number"
+        placeholder="Partner Number"
+        value={form.partner_number}
         onChange={handleChange}
         required
       /><br />

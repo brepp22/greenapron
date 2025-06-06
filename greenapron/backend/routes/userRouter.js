@@ -35,19 +35,19 @@ router.get('/', async (req, res) => {
 
 /**  POST /api/users/register  – create account */
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password)
+  const { name, partner_number, password } = req.body;
+  if (!name || !partner_number || !password)
     return res.status(400).json({ message: 'Missing required fields' });
 
   try {
     const hash     = bcrypt.hashSync(password, 10);
-    const newUser  = await Users.createUser({ name, email, password: hash });
+    const newUser  = await Users.createUser({ name, partner_number, password: hash });
     const token    = generateToken(newUser);
 
-    res.status(201).json({ id: newUser.id, name, email, token });
+    res.status(201).json({ id: newUser.id, name, partner_number, token });
   } catch (err) {
     if (err.code === 'SQLITE_CONSTRAINT') {
-      res.status(409).json({ message: 'Email already exists' });
+      res.status(409).json({ message: 'Partner Number already exists' });
     } else {
       res.status(500).json({ message: 'Server error', error: err.message });
     }
@@ -56,12 +56,12 @@ router.post('/register', async (req, res) => {
 
 /**  POST /api/users/login  – authenticate */
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password)
-    return res.status(400).json({ message: 'Email and password required' });
+  const { partner_number, password } = req.body;
+  if (!partner_number || !password)
+    return res.status(400).json({ message: 'Partner Number and Password Required' });
 
   try {
-    const user = await Users.findByEmail(email);
+    const user = await Users.findByPartnerNumber(partner_number);
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user);
       res.json({ message: `Welcome back, ${user.name}!`, token });
@@ -78,7 +78,7 @@ router.get('/profile', restricted, async (req, res) => {
     const user = await Users.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const safeUser = { id: user.id, name: user.name, email: user.email };
+    const safeUser = { id: user.id, name: user.name, partner_number: user.partner_number };
     res.json(safeUser);
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });

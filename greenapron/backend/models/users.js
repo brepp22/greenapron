@@ -7,8 +7,8 @@ async function createUser(user) {
 }
 
 
-function findByEmail(email) {
-  return db('users').where({email}).first();
+function findByPartnerNumber(partner_number) {
+  return db('users').where({partner_number}).first();
 }
 
 function getAllUsers() {
@@ -21,7 +21,7 @@ function findById(id) {
 
 module.exports = {
   createUser,
-  findByEmail,
+  findByPartnerNumber,
   getAllUsers,
   findById 
 };

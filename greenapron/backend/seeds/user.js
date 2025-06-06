@@ -12,13 +12,13 @@ exports.seed = async function(knex) {
   const users = [
     {
       name: 'John Doe',
-      email: 'john.doe@example.com',
+      partner_number: '3344556',
       role: 'Barista',
       password: await bcrypt.hash('starbucks123', 8)
     },
     {
       name: 'Jane Smith',
-      email: 'jane.smith@example.com',
+      partner_number: '9988776',
       role: 'Shift Supervisor',
       password: await bcrypt.hash('password456', 8)
     }
