@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './ApronCard.css';
 
-const ApronCard = ({ people, onPostMessage, authorName }) => {
+const ApronCard = ({ people, onPostMessage, authorName, currentUserId }) => {
   const [inputs, setInputs] = useState({});
   const [expand, setExpand] = useState({});
+
+  const filteredPeople = people.filter((person) => person.id !== currentUserId);
+
 
   const handlePost = (userId, index, authorName) => {
     const text = inputs[index] || '';
@@ -39,7 +42,11 @@ const ApronCard = ({ people, onPostMessage, authorName }) => {
 
   return (
     <div className="board">
-      {people.map((person, index) => {
+  
+    {filteredPeople.map((person, index) => {
+      // ... rest of your rendering logic
+
+      // {people.map((person, index) => {
         const isExpand = expand[person.id];
         const messages = person.messages ?? [];
         const visibleMessages = isExpand ? messages : messages.slice(0,3);

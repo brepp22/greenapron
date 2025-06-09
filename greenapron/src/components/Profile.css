@@ -22,4 +22,14 @@
   color: #555;
 }
 
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
 
