@@ -9,6 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'secret-dev-key'; //move to .env be
 
 const restricted = require('../../src/middleware/restricted');
 
+const db = require('../db')
 
 
 function generateToken(user){
@@ -73,17 +74,52 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// router.get('/profile', restricted, async (req, res) => {
+//   try {
+//     const user = await Users.findById(req.user.id);
+//     if (!user) return res.status(404).json({ message: 'User not found' });
+
+//     const safeUser = { id: user.id, name: user.name, partner_number: user.partner_number };
+//     res.json(safeUser);
+//   } catch (err) {
+//     res.status(500).json({ message: 'Server error', error: err.message });
+//   }
+// });
+
+
 router.get('/profile', restricted, async (req, res) => {
   try {
-    const user = await Users.findById(req.user.id);
+    const userId = req.user.id;
+
+    const user = await Users.findById(userId);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const safeUser = { id: user.id, name: user.name, partner_number: user.partner_number };
+    // Fetch all comments/messages received
+    const comments = await db('messages')
+      .where('board_owner_id', userId)
+      .join('users as authors', 'messages.author_id', 'authors.id')
+      .select(
+        'messages.id',
+        'messages.text',
+        'messages.created_at',
+        'authors.name as from_user'
+      )
+      .orderBy('messages.created_at', 'desc');
+
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      partner_number: user.partner_number,
+      comments_received: comments
+    };
+
     res.json(safeUser);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
+
 
 module.exports = router;
 

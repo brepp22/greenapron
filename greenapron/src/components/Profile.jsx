@@ -36,11 +36,27 @@ const Profile = ({token, setToken}) => {
 
   if (!user) return <p>Loading...</p>;
 
+
+  
+
   return (
     <div className="profile-container">
       <h2>Welcome, {user.name || user.username}</h2>
-      <p>Parnter Number: {user.partner_number}</p>
-      {/* <button type='button' onClick={handleLogout}>Logout</button> */}
+      <p>Partner Number: {user.partner_number}</p>
+
+      <h3>Comments Received:</h3>
+      {user.comments_received && user.comments_received.length > 0 ? (
+        <ul className="comments-list">
+          {user.comments_received.map((comment) => (
+            <li key={comment.id}>
+              <strong>{comment.from_user}:</strong> {comment.text}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No comments received yet.</p>
+      )}
+
     </div>
   );
 };
