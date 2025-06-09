@@ -44,9 +44,6 @@ const ApronCard = ({ people, onPostMessage, authorName, currentUserId }) => {
     <div className="board">
   
     {filteredPeople.map((person, index) => {
-      // ... rest of your rendering logic
-
-      // {people.map((person, index) => {
         const isExpand = expand[person.id];
         const messages = person.messages ?? [];
         const visibleMessages = isExpand ? messages : messages.slice(0,3);

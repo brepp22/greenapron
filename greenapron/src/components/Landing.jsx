@@ -10,10 +10,10 @@ const Landing = () => {
   };
 
   return (
+
     <div className="landing-container">
       <header className="landing-header">
         <h1>Welcome to Your Virtual Green Apron Board</h1>
-        <p></p>
         <button className="start-button" onClick={handleGetStarted}>
           Get Started
         </button>
