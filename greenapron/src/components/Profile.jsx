@@ -16,7 +16,7 @@ const Profile = ({token, setToken}) => {
 
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/api/users/profile`, {
+        const res = await fetch(`https://backend-greenapron.onrender.com/api/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

@@ -21,8 +21,8 @@ const LoginForm = ({setToken}) => {
     setError('');
 
     const endpoint = isRegister ?
-      'http://localhost:8080/api/users/register' :
-      'http://localhost:8080/api/users/login';
+      'https://backend-greenapron.onrender.com/api/users/register' :
+      'https://backend-greenapron.onrender.com/api/users/login';
 
     const payload = isRegister ?
       form :

@@ -23,7 +23,7 @@ function App() {
 
     const fetchLoggedInUser = async () => {
       try {
-        const res = await fetch('http://localhost:8080/api/profile', { 
+        const res = await fetch('https://backend-greenapron.onrender.com/api/profile', { 
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ function App() {
 
     const fetchPeopleAndMessages = async () => {
       try {
-        const usersResponse = await fetch('http://localhost:8080/api/users');
+        const usersResponse = await fetch('https://backend-greenapron.onrender.com/api/users');
         if (!usersResponse.ok) {
           throw new Error('Failed to fetch users');
         }
@@ -53,7 +53,7 @@ function App() {
 
         const usersWithMessages = await Promise.all(
           usersData.map(async (user) => {
-            const messagesResponse = await fetch(`http://localhost:8080/api/messages/${user.id}`);
+            const messagesResponse = await fetch(`https://backend-greenapron.onrender.com/api/messages/${user.id}`);
             const messagesData = messagesResponse.ok ? await messagesResponse.json() : [];
             return {
               ...user,
@@ -73,7 +73,7 @@ function App() {
 
   const handlePostMessage = async (boardOwnerId, text, authorId) => {
     try {
-      const response = await fetch('http://localhost:8080/api/messages', {
+      const response = await fetch('https://backend-greenapron.onrender.com/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
