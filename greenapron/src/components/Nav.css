@@ -1,27 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
 .nav-bar {
-  background-color: #0d0d0d;
+  background-color: #000000; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 30px;
-  box-shadow: 0 2px 10px rgba(0, 255, 195, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .nav-logo {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
-  background: linear-gradient(90deg, #00ffc3, #00bfff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-family: 'Georgia', serif;
+  color: #dcbfa6;
   cursor: pointer;
-  text-shadow: 0 0 10px rgba(0, 255, 195, 0.7);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, color 0.3s ease;
 }
 
 .nav-logo:hover {
   transform: scale(1.05);
-  text-shadow: 0 0 15px #00ffc3, 0 0 30px #00bfff;
+  color: #f5eee6;
 }
 
 .nav-links {
@@ -33,24 +32,37 @@
 
 .nav-links li a,
 .logout-button {
-  font-family: monospace;
+  font-family: 'Quicksand';
   font-size: 1rem;
-  color: #ffffff;
+  color: #f0e7df;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.05);
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.nav-links li a:hover,
-.logout-button:hover {
-  background: linear-gradient(90deg, #00ffc3, #00bfff);
-  color: #0d0d0d;
-  transform: scale(1.05);
+  padding: 8px 16px;
+  border-radius: 20px;
 }
 
 .logout-button {
   border: none;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
 }
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #32542d;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+

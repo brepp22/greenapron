@@ -13,9 +13,9 @@ const Landing = () => {
 
     <div className="landing-container">
       <header className="landing-header">
-        <h1>Welcome to Your Virtual Green Apron Board</h1>
+        <h1> Green Apron Board</h1>
         <button className="start-button" onClick={handleGetStarted}>
-          Get Started
+          Write a Message
         </button>
       </header>
     </div>

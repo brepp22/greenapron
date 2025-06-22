@@ -1,46 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
 .landing-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
-  color: #f5f5f5;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom right, #352a24, #1f1713);
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-repeat: repeat;
+  color: #f8f5f2;
   text-align: center;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .landing-header {
   font-size: 3rem;
   font-weight: 700;
-  color: #00ffc3;
-  text-shadow: 0 0 10px #00ffc3;
+  color: #e5d3c5;
   margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
 .landing-subtext {
   font-size: 1.2rem;
-  color: #cccccc;
-  margin-bottom: 40px;
+  color: #d9cfc7;
   max-width: 600px;
-  line-height: 1.6;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  font-weight: 500;
 }
 
 .start-button {
   padding: 14px 32px;
-  font-size: 1.1rem;
-  color: #0d0d0d;
-  background: linear-gradient(90deg, #299c81, #02b8f5);
+  font-size: 1rem;
+  color: #2b1b16;
+  background-color: #e5c9b6;
   border: none;
-  border-radius: 50px;
+  border-radius: 30px;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 15px #299c81;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .start-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #299c81, 0 0 40px #00bfff;
+  background-color: #f2ddc6;
+  transform: translateY(-2px);
 }

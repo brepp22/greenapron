@@ -1,75 +1,95 @@
-/* Center the login form on the page */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+body{
+  height: 100vh;
+}
 .login-form {
-    width: 100%;
-    max-width: 400px;
-    margin: 80px auto;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    text-align: center;
-    font-family: monospace;
-  }
-  
-  /* Email and password inputs */
-  .input-email,
-  .input-password,
-  .input-register {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 16px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: monospace;
-  }
-  
-  
-  .login-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: monospace;
-  }
-  
-  .login-button:hover {
-    background-color: #45a049;
-  }
-  
-  
-  .error-message {
-    color: red;
-    margin-top: 12px;
-    font-size: 14px;
-  }
-  
-  .role-section {
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  background-color: #f8f5f2; /* warm cream background */
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
+  border: none;
+}
+
+
+.input-email,
+.input-password,
+.input-register {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #d6c7bc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #fdfaf8;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
+}
+
+.input-email:focus,
+.input-password:focus,
+.input-register:focus {
+  outline: none;
+  border-color: #a9746e; /* warm accent */
+  box-shadow: 0 0 5px rgba(169, 116, 110, 0.5);
+}
+
+
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #7d634d; /* mocha tone */
+  color: #fff9f2;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-button:hover {
+  background-color: #584738;
+  transform: translateY(-2px);
+}
+
+
+.error-message {
+  color: #a94442;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+
+.role-section {
   margin-bottom: 20px;
   text-align: left;
 }
 
 .role-section p {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 8px;
-  font-family: monospace;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
 }
 
 .role-option {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
-  font-family: monospace;
+  margin-bottom: 10px;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
 }
 
 .role-option input[type="radio"] {
   margin-right: 8px;
-  accent-color: #4caf50; 
+  accent-color: #7d634d;
 }
