@@ -49,3 +49,41 @@
   background-color: #f2ddc6;
   transform: translateY(-2px);
 }
+
+/* 🔽 Mobile (max-width: 600px) */
+@media (max-width: 600px) {
+  .landing-container {
+    padding: 30px 16px;
+  }
+
+  .landing-header {
+    font-size: 2.2rem;
+  }
+
+  .landing-subtext {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .start-button {
+    font-size: 0.95rem;
+    padding: 12px 24px;
+  }
+}
+
+/* 🔽 Tablet (601px - 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .landing-header {
+    font-size: 2.5rem;
+  }
+
+  .landing-subtext {
+    font-size: 1.1rem;
+  }
+
+  .start-button {
+    font-size: 1rem;
+    padding: 13px 28px;
+  }
+}

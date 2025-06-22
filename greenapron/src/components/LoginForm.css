@@ -97,32 +97,32 @@ body{
 /* Small devices (phones, <= 600px) */
 @media (max-width: 600px) {
   .login-form {
-    margin: 40px 20px;
-    padding: 20px;
+    margin: 55px 24px;
+    padding: 24px;
   }
 
   .input-email,
   .input-password,
   .input-register {
-    font-size: 14px;
-    padding: 10px 12px;
+    font-size: 16px;
+    padding: 14px 16px;
   }
 
   .login-button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding: 14px;
   }
 
   .role-section p {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .role-option {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .error-message {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
