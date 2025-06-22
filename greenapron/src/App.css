@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
 
-/* Root-level body styling */
+
 body {
-  background: linear-gradient(to bottom right, #352a24, #1f1713); /* rich roast tones */
+  background: linear-gradient(to bottom right, #352a24, #1f1713); 
   font-family: 'Quicksand', sans-serif;
   color: #f8f5f2;
   margin: 0;
@@ -10,13 +10,13 @@ body {
   line-height: 1.6;
 }
 
-/* App wrapper */
+
 .App {
   text-align: center;
   padding: 20px;
 }
 
-/* Header text */
+
 .App h1 {
   color: #e5d3c5;
   font-family: 'Quicksand', sans-serif;
