@@ -93,3 +93,53 @@ body{
   margin-right: 8px;
   accent-color: #7d634d;
 }
+
+/* Small devices (phones, <= 600px) */
+@media (max-width: 600px) {
+  .login-form {
+    margin: 40px 20px;
+    padding: 20px;
+  }
+
+  .input-email,
+  .input-password,
+  .input-register {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .login-button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .role-section p {
+    font-size: 14px;
+  }
+
+  .role-option {
+    font-size: 14px;
+  }
+
+  .error-message {
+    font-size: 12px;
+  }
+}
+
+/* Medium devices (tablets, 601px - 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .login-form {
+    margin: 60px auto;
+    padding: 25px;
+  }
+
+  .input-email,
+  .input-password,
+  .input-register {
+    font-size: 15px;
+  }
+
+  .login-button {
+    font-size: 15px;
+  }
+}

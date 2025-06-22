@@ -131,3 +131,71 @@ body {
   transform: translateY(-2px);
 }
 
+/* Phones (max width: 600px) */
+@media (max-width: 600px) {
+  .board {
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 16px;
+  }
+
+  .person-container {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .person-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .person-container p {
+    font-size: 0.95rem;
+  }
+
+  .messages {
+    font-size: 0.95rem;
+  }
+
+  .message {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding: 12px 14px;
+  }
+
+  .button {
+    font-size: 0.95rem;
+    padding: 10px 24px;
+  }
+
+  .message-toggle {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablets (601px - 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .person-container {
+    width: 90%;
+  }
+
+  .board {
+    gap: 20px;
+    padding: 25px;
+  }
+
+  .person-container h3 {
+    font-size: 1.5rem;
+  }
+
+  .input {
+    font-size: 1rem;
+  }
+
+  .button {
+    font-size: 1rem;
+  }
+}
