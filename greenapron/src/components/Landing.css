@@ -34,7 +34,7 @@
 
 .start-button {
   padding: 14px 32px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #2b1b16;
   background-color: #e5c9b6;
   border: none;
@@ -83,7 +83,7 @@
   }
 
   .start-button {
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding: 13px 28px;
   }
 }
