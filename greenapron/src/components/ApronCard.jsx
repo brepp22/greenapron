@@ -51,14 +51,14 @@ const ApronCard = ({ people, onPostMessage, authorName, currentUserId }) => {
         return (
         <div className="person-container" key={person.id}>
           {person.image && <img src={person.image} alt={person.name} />}
-          <h3>{person.name}</h3>
+          <h3>{person.name.split(' ')[0]}</h3>
           <p>{person.role}</p>
 
           <div className="messages">
             {visibleMessages.length > 0 ? (
               visibleMessages.map((msg, i) => (
                 <p key={msg.id || i} className="message">
-                  <strong>{msg.author_name || 'Anonymous'}</strong>: {msg.text}
+                  <strong>{msg.author_name.split(' ')[0] || 'Anonymous'}</strong>: {msg.text}
                 </p>
               ))
             ) : (

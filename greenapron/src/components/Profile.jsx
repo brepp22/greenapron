@@ -41,7 +41,7 @@ const Profile = ({token, setToken}) => {
 
   return (
     <div className="profile-container">
-      <h2> {user.name}</h2>
+      <h2> {user.name.split(' ')[0]}</h2>
       <p>Partner Number: {user.partner_number}</p>
 
       <h3>Comments Received:</h3>
