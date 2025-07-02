@@ -53,11 +53,10 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 28px;
-  align-items: center;
+  gap: 30px;
   margin-left: auto;
   flex-wrap: nowrap;
-  max-width: 350px;
+  max-width: 500px;
 }
 
 .nav-links li a,
