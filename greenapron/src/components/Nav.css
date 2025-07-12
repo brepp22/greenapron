@@ -1,3 +1,9 @@
+/* Box-sizing global to make sizing easier */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 .nav-bar {
   display: flex;
@@ -10,9 +16,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease;
-  justify-content: space-between;
   height: auto;
-  min-height:50px;
+  min-height: 50px;
 }
 
 .nav-logo {
@@ -39,20 +44,61 @@
   outline: none;
 }
 
+
+.nav-links li a,
+.logout-button {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.05rem;
+  color: #f0e7df;
+  text-decoration: none;
+  padding: 10px 24px;  /* increased horizontal padding */
+  border-radius: 24px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 110px; /* slightly wider for better consistency */
+  border: none;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(125, 99, 77, 0.25);
+  white-space: nowrap;
+}
+
+/* Fix button cut off - ensure no overflow */
+.nav-links li,
+.nav-links li a,
+.logout-button {
+  overflow: visible;
+}
+
+/* Hover/focus states */
+.nav-links li a:hover,
+.logout-button:hover,
+.nav-links li a:focus,
+.logout-button:focus {
+  background-color: #a9746e;
+  color: #fff9f2;
+  box-shadow: 0 4px 12px rgba(169, 116, 110, 0.7);
+  outline: none;
+}
+
+
+/* Start: nav-links visible on desktop, hidden on mobile */
 .nav-links {
   list-style: none;
-  display: none;
+  display: flex;
   gap: 30px;
   margin-left: auto;
   flex-wrap: nowrap;
   max-width: 500px;
- 
 }
 
-.nav-links.open{
-  display:flex;
-}
-
+/* Shared styles for nav links and logout button */
 .nav-links li a,
 .logout-button {
   font-family: 'Quicksand', sans-serif;
@@ -65,14 +111,17 @@
   box-shadow: inset 0 0 0 0 transparent;
   user-select: none;
   position: relative;
-}
-
-.logout-button {
-  background: rgba(255, 255, 255, 0.07);
+  display: inline-flex;        /* inline-flex for vertical and horizontal centering */
+  align-items: center;
+  justify-content: center;
+  height: 40px;                /* consistent height */
+  min-width: 90px;
   border: none;
+  background: rgba(255, 255, 255, 0.07);
   cursor: pointer;
   font-weight: 600;
   box-shadow: 0 2px 6px rgba(125, 99, 77, 0.25);
+  white-space: nowrap;
 }
 
 .nav-links li a:hover,
@@ -102,6 +151,7 @@
   width: 100%;
 }
 
+
 /* Mobile styles */
 @media (max-width: 600px) {
   .nav-bar {
@@ -116,25 +166,30 @@
   }
 
   .nav-links {
-    display:none;
+    display: none;
     flex-direction: column;
     width: 100%;
-    gap: 25px;
+    gap: 16px;   /* less gap for better fit */
+    max-width: 100%;
+  }
+
+  .nav-links.open {
+    display: flex;
   }
 
   .nav-links li a,
   .logout-button {
-    flex-direction: column;
+    display: block;
     width: 100%;
-    padding: 14px 16px;
-    font-size: 1.1rem;
+    padding: 12px 20px; /* smaller horizontal padding */
+    font-size: 1.05rem; /* slightly smaller font */
     text-align: left;
     border-radius: 12px;
+    height: auto;
+    min-width: auto;
+    box-shadow: none;
     background-color: rgba(255, 255, 255, 0.07);
-  }
-
-  .nav-links.open{
-    display:flex;
+    max-width: 100%;    /* prevent overflow */
   }
 
   .nav-links a::after {
