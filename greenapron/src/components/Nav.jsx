@@ -7,7 +7,10 @@ const Nav = ({ token, setToken }) => {
   const navigate = useNavigate();
 
   const toggleDropdown = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen(prev => {
+      console.log('Toggling menu', !prev);
+      return !prev;
+    });
   };
 
   const handleLogout = () => {
@@ -16,15 +19,23 @@ const Nav = ({ token, setToken }) => {
     navigate('/');
   };
 
-  console.log('Nav render. Token:', token)
 
   return (
     <nav className="nav-bar">
-      <div className="nav-logo" onClick={toggleDropdown}>
+      <div 
+        className="nav-logo" 
+        onClick={toggleDropdown}
+        aria-label='Toggle menu'
+        role='button'
+        tabIndex={0}
+        onKeyDown={(e)=> {
+          if (e.key === 'Enter' || e.key === ' ') toggleDropdown();
+        }}
+      >
         ☰
       </div>
-      {isOpen && (
-        <ul className="nav-links">
+  
+        <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/board">Board</Link></li>
           {!token ? (
@@ -36,7 +47,6 @@ const Nav = ({ token, setToken }) => {
             </>
           )}
         </ul>
-      )}
     </nav>
   );
 };

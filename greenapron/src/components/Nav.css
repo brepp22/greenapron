@@ -1,5 +1,8 @@
 
 .nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #1f1713;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6); 
   padding: 10px 40px;
@@ -12,18 +15,6 @@
   min-height:50px;
 }
 
-/* .nav-logo {
-  font-family: 'Georgia', serif;
-  font-weight: 700;
-  font-size: 2.4rem;
-  color: #dcbfa6;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.25s ease, color 0.4s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  margin-left: 20px;
-} */
-
 .nav-logo {
   font-family: 'Georgia', serif;
   font-weight: 700;
@@ -33,12 +24,10 @@
   user-select: none;
   transition: transform 0.3s ease, color 0.4s ease;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  /* Replace margin-left with padding if spacing is needed */
-  padding-left: 20px;  /* safer than margin for transforms */
-  display: inline-block; /* helps transform behave properly */
+  padding-left: 20px; 
+  display: inline-block; 
 }
 
-/* On active toggle, slide down by 10px */
 .nav-logo.active {
   transform: translateY(10px);
 }
@@ -52,11 +41,16 @@
 
 .nav-links {
   list-style: none;
-  display: flex;
+  display: none;
   gap: 30px;
   margin-left: auto;
   flex-wrap: nowrap;
   max-width: 500px;
+ 
+}
+
+.nav-links.open{
+  display:flex;
 }
 
 .nav-links li a,
@@ -122,6 +116,7 @@
   }
 
   .nav-links {
+    display:none;
     flex-direction: column;
     width: 100%;
     gap: 25px;
@@ -129,12 +124,17 @@
 
   .nav-links li a,
   .logout-button {
+    flex-direction: column;
     width: 100%;
     padding: 14px 16px;
     font-size: 1.1rem;
     text-align: left;
     border-radius: 12px;
     background-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .nav-links.open{
+    display:flex;
   }
 
   .nav-links a::after {
