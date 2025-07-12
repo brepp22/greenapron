@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import ApronCard from './components/ApronCard';
 import LoginForm from './components/LoginForm';
 import Landing from './components/Landing';
@@ -39,6 +40,36 @@ function App() {
 
     fetchLoggedInUser();
   }, [token]);
+
+  useEffect(() => {
+  if (!token) return;
+
+  try {
+    const decoded = jwtDecode(token);
+    const now = Date.now() / 1000;
+
+    if (decoded.exp < now) {
+      console.log('Token expired');
+      localStorage.removeItem('token');
+      setToken(null);
+    } else {
+      // Set auto logout timeout
+      const timeUntilExpire = decoded.exp * 1000 - Date.now();
+      const logoutTimer = setTimeout(() => {
+        console.log('Token expired (timer)');
+        localStorage.removeItem('token');
+        setToken(null);
+      }, timeUntilExpire);
+
+      return () => clearTimeout(logoutTimer);
+    }
+  } catch (err) {
+    console.error('Token decode error:', err);
+    localStorage.removeItem('token');
+    setToken(null);
+  }
+}, [token]);
+
 
   useEffect(() => {
     if (!token) return;
