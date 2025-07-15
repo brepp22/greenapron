@@ -7,6 +7,7 @@ const LoginForm = ({setToken}) => {
   const [form, setForm] = useState({ partner_number: '', password: '', role: '', });
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const roleOptions = ['Barista', 'Shift Supervisor', 'Store Manager'];
@@ -37,12 +38,24 @@ const LoginForm = ({setToken}) => {
       navigate('/board'); 
     } catch (err) {
       setError(err.response?.data?.message || `${isRegister ? 'Registration' : 'Login'}`);
+    } finally{
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h2>{isRegister ? 'Register' : 'Login'}</h2>
+    // <form onSubmit={handleSubmit} className="login-form">
+    //   <h2>{isRegister ? 'Register' : 'Login'}</h2>
+
+    <div>
+
+      {loading ? (
+        <div className='spinner'></div>
+      ):(
+        <form onSubmit={handleSubmit} className ='login-form'>
+
+          <h2>{isRegister ? 'Register' : 'Login'}</h2>
+     
 
        {isRegister && (
         <>
@@ -112,7 +125,11 @@ const LoginForm = ({setToken}) => {
         </span>
       </p>
     </form>
-  );
-};
+//   );
+// };
+      )}
+    </div>
+    );
+  };
 
 export default LoginForm;
