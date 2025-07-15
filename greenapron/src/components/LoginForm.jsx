@@ -4,7 +4,7 @@ import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = ({setToken}) => {
-  const [form, setForm] = useState({ partner_number: '', password: '', role: '', });
+  const [form, setForm] = useState({ partner_number: '', password: '', role: '', image: null });
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState('');
   const [loading, setLoading] = useState(false);
@@ -85,9 +85,21 @@ const LoginForm = ({setToken}) => {
       </label>
     ))}
   </div>
+
+  <div className='photo-selection'>
+    <p>Choose Your Photo</p>
+    <input 
+        className='input-image'
+        type='file'
+        name='image'
+        accept='image/*'
+        onChange={(e) => setForm({...form, image: e.target.files[0]})}
+      />
+  </div>
 </>
 
       )}
+
 
       <input
         className="input-email"

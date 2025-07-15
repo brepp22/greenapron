@@ -94,6 +94,71 @@ body{
   accent-color: #7d634d;
 }
 
+.photo-selection {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.photo-selection p {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
+}
+
+/* Style the file input to match the other inputs */
+.input-image {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d6c7bc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fdfaf8;
+  font-family: 'Quicksand', sans-serif;
+  color: #3e2b23;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.input-image:focus {
+  outline: none;
+  border-color: #a9746e;
+  box-shadow: 0 0 5px rgba(169, 116, 110, 0.5);
+}
+
+/* Optional: Improve the file input appearance */
+.input-image::-webkit-file-upload-button {
+  background: #7d634d;
+  color: #fff9f2;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-image::-webkit-file-upload-button:hover {
+  background: #584738;
+}
+
+/* Firefox */
+.input-image::file-selector-button {
+  background: #7d634d;
+  color: #fff9f2;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-image::file-selector-button:hover {
+  background: #584738;
+}
+
+
 /* Small devices (phones, <= 600px) */
 @media (max-width: 600px) {
   .login-form {
