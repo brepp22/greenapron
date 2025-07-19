@@ -25,6 +25,9 @@ const Profile = ({token, setToken}) => {
         if (!res.ok) throw new Error('Failed to fetch user profile');
 
         const data = await res.json();
+
+        console.log(data)
+
         setUser(data);
       } catch (err) {
         console.error(err);
@@ -42,6 +45,7 @@ const Profile = ({token, setToken}) => {
   return (
     <div className="profile-container">
       <h2> {user.name.split(' ')[0]}</h2>
+      <img src={user.photo} alt="profile-photo" className='profile-photo' />
       <p>Partner Number: {user.partner_number}</p>
 
       <h3>Comments Received:</h3>
