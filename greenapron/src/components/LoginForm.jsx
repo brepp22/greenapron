@@ -20,6 +20,7 @@ const LoginForm = ({setToken}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     const endpoint = isRegister ?
       'https://backend-greenapron.onrender.com/api/users/register' :
