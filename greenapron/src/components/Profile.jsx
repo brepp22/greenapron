@@ -45,7 +45,13 @@ const Profile = ({token, setToken}) => {
   return (
     <div className="profile-container">
       <h2> {user.name.split(' ')[0]}</h2>
-      <img src={user.photo} alt="profile-photo" className='profile-photo' />
+      {/* <img src={user.photo} alt="profile-photo" className='profile-photo' /> */}
+       <img
+       src={user.photo || '/avatars/default.png'}
+       alt="Profile avatar"
+       className="profile-photo"
+      />
+
       <p>Partner Number: {user.partner_number}</p>
 
       <h3>Comments Received:</h3>
