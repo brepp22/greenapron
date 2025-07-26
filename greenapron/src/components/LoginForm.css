@@ -158,6 +158,25 @@ body{
   background: #584738;
 }
 
+.avatar-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.avatar-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+.avatar-image.selected {
+  border: 2px solid #006142;
+}
+
 
 /* Small devices (phones, <= 600px) */
 @media (max-width: 600px) {

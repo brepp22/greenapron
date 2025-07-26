@@ -4,7 +4,8 @@ import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = ({setToken}) => {
-  const [form, setForm] = useState({ partner_number: '', password: '', role: '', image: null });
+  // const [form, setForm] = useState({ partner_number: '', password: '', role: '', image: null });
+  const [form, setForm] = useState({partner_number: '', password: '', role: '', image: ''})
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState('');
   const [loading, setLoading] = useState(false);
@@ -87,7 +88,7 @@ const LoginForm = ({setToken}) => {
     ))}
   </div>
 
-  <div className='photo-selection'>
+  {/* <div className='photo-selection'>
     <p>Choose Your Photo</p>
     <input 
         className='input-image'
@@ -96,7 +97,26 @@ const LoginForm = ({setToken}) => {
         accept='image/*'
         onChange={(e) => setForm({...form, image: e.target.files[0]})}
       />
+  </div> */}
+
+  <div className='photo-selection'>
+  <p>Choose Your Avatar</p>
+  <div className="avatar-options">
+    {['avatar1.png', 'avatar2.png'].map((avatar, idx) => {
+      const avatarPath = `/avatars/${avatar}`;
+      return (
+        <img
+          key={idx}
+          src={avatarPath}
+          alt={`Avatar ${idx + 1}`}
+          className={`avatar-image ${form.image === avatarPath ? 'selected' : ''}`}
+          onClick={() => setForm({ ...form, image: avatarPath })}
+        />
+      );
+    })}
   </div>
+</div>
+
 </>
 
       )}
