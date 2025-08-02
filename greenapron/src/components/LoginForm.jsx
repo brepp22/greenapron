@@ -49,7 +49,7 @@ const LoginForm = ({setToken}) => {
     // <form onSubmit={handleSubmit} className="login-form">
     //   <h2>{isRegister ? 'Register' : 'Login'}</h2>
 
-    <div>
+    <div className = 'page-wrapper'>
 
       {loading ? (
         <div className='spinner'></div>

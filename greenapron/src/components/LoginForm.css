@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
 body{
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
+
 .login-form {
   width: 100%;
   max-width: 400px;
-  margin: 80px auto;
+  margin: 80px auto 100px;
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
@@ -14,6 +18,17 @@ body{
   font-family: 'Quicksand', sans-serif;
   color: #3e2b23;
   border: none;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px 80px; 
+  background: linear-gradient(to bottom right, #352a24, #1f1713);
+  box-sizing: border-box;
 }
 
 
@@ -106,7 +121,6 @@ body{
   color: #3e2b23;
 }
 
-/* Style the file input to match the other inputs */
 .input-image {
   width: 100%;
   padding: 12px 14px;
@@ -126,7 +140,6 @@ body{
   box-shadow: 0 0 5px rgba(169, 116, 110, 0.5);
 }
 
-/* Optional: Improve the file input appearance */
 .input-image::-webkit-file-upload-button {
   background: #7d634d;
   color: #fff9f2;
@@ -178,7 +191,7 @@ body{
 }
 
 
-/* Small devices (phones, <= 600px) */
+
 @media (max-width: 600px) {
   .login-form {
     margin: 55px 24px;
