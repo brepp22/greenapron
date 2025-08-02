@@ -51,7 +51,21 @@
   color: #444;
 }
 
-/* Optional: Hover effect for interactivity */
 .comments-list li:hover {
   background-color: #eaf1f8;
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 20px 15px;
+  }
+
+  .profile-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-container h2 {
+    font-size: 1.5rem;
+  }
 }
