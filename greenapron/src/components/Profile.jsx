@@ -87,7 +87,8 @@ const Profile = ({token, setToken}) => {
        alt="Profile avatar"
        className="profile-photo"
       />
-
+    
+<p></p>
       {!editMode && (
         <button 
           type='button'
@@ -99,7 +100,7 @@ const Profile = ({token, setToken}) => {
       )}
 
       <p>Partner Number: {user.partner_number}</p>
-
+      <p>Bio: {user.bio} </p>
       
       <h3>Comments Received:</h3>
       {user.comments_received && user.comments_received.length > 0 ? (
