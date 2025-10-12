@@ -278,7 +278,7 @@ const LoginForm = ({ setToken }) => {
             <div className="form-section">
               <h3>Choose Your Avatar</h3>
               <div className="avatar-options">
-                {['avatar1.png', 'avatar2.png', 'avatar3.png'].map((avatar, idx) => {
+                {['avatar1.png', 'avatar2.png'].map((avatar, idx) => {
                   const avatarPath = `/avatars/${avatar}`;
                   return (
                     <img
