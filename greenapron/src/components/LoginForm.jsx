@@ -312,7 +312,7 @@ const LoginForm = ({ setToken }) => {
           className="input-field"
           type="password"
           name="password"
-          placeholder="Enter Password"
+          placeholder="Password"
           value={form.password}
           onChange={handleChange}
           required
