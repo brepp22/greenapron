@@ -301,7 +301,7 @@ const LoginForm = ({ setToken }) => {
           className="input-field"
           type="text"
           name="partner_number"
-          placeholder="Enter Partner Number"
+          placeholder="Partner Number"
           value={form.partner_number}
           onChange={handleChange}
           required
