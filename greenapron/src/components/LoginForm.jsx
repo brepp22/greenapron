@@ -171,7 +171,15 @@ import axios from 'axios';
 import './LoginForm.css';
 
 const LoginForm = ({ setToken }) => {
-  const [form, setForm] = useState({ partner_number: '', password: '', role: '', image: '' });
+  const [form, setForm] = useState({
+    first_name: '',
+    last_name: '',
+    partner_number: '',
+    password: '',
+    role: '',
+    image: ''
+  });
+
   const [error, setError] = useState('');
   const [isRegister, setIsRegister] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -211,23 +219,45 @@ const LoginForm = ({ setToken }) => {
   return (
     <div className="page-wrapper">
       <form onSubmit={handleSubmit} className="login-form">
-        <h2 className="form-title">{isRegister ? 'Create Account' : 'Welcome Back'}</h2>
+        <h2 className="form-title">{isRegister ? 'Create Your Account' : 'Welcome Back'}</h2>
 
         {isRegister && (
           <>
-            <label htmlFor="name">Name</label>
-            <input
-              className="input-field"
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={form.name || ''}
-              onChange={handleChange}
-              required
-            />
+            {/* --- NAME SECTION --- */}
+            <div className="form-section">
+              <h3>Personal Info</h3>
+              <div className="name-fields">
+                <div className="input-group">
+                  <label htmlFor="first_name">First Name</label>
+                  <input
+                    className="input-field"
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    value={form.first_name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
 
-            <div className="role-section">
-              <p>Choose Your Role</p>
+                <div className="input-group">
+                  <label htmlFor="last_name">Last Name</label>
+                  <input
+                    className="input-field"
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    value={form.last_name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* --- ROLE SELECTION --- */}
+            <div className="form-section">
+              <h3>Your Role</h3>
               <div className="role-options">
                 {roleOptions.map((role) => (
                   <label key={role} className="role-option">
@@ -244,10 +274,11 @@ const LoginForm = ({ setToken }) => {
               </div>
             </div>
 
-            <div className="photo-selection">
-              <p>Choose Your Avatar</p>
+            {/* --- AVATAR SELECTION --- */}
+            <div className="form-section">
+              <h3>Choose Your Avatar</h3>
               <div className="avatar-options">
-                {['avatar1.png', 'avatar2.png'].map((avatar, idx) => {
+                {['avatar1.png', 'avatar2.png', 'avatar3.png'].map((avatar, idx) => {
                   const avatarPath = `/avatars/${avatar}`;
                   return (
                     <img
@@ -264,12 +295,13 @@ const LoginForm = ({ setToken }) => {
           </>
         )}
 
+        {/* --- LOGIN FIELDS (shared) --- */}
         <label htmlFor="partner_number">Partner Number</label>
         <input
           className="input-field"
           type="text"
           name="partner_number"
-          placeholder="Partner Number"
+          placeholder="Enter Partner Number"
           value={form.partner_number}
           onChange={handleChange}
           required
@@ -280,7 +312,7 @@ const LoginForm = ({ setToken }) => {
           className="input-field"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Enter Password"
           value={form.password}
           onChange={handleChange}
           required
@@ -289,7 +321,13 @@ const LoginForm = ({ setToken }) => {
         {error && <p className="error-message">{error}</p>}
 
         <button className="login-button" type="submit" disabled={loading}>
-          {loading ? (isRegister ? 'Creating Account...' : 'Logging In...') : isRegister ? 'Register' : 'Login'}
+          {loading
+            ? isRegister
+              ? 'Creating Account...'
+              : 'Logging In...'
+            : isRegister
+            ? 'Register'
+            : 'Login'}
         </button>
 
         <p className="toggle-text">
@@ -297,7 +335,14 @@ const LoginForm = ({ setToken }) => {
           <span
             className="toggle-link"
             onClick={() => {
-              setForm({ partner_number: '', password: '', role: '', image: '' });
+              setForm({
+                first_name: '',
+                last_name: '',
+                partner_number: '',
+                password: '',
+                role: '',
+                image: ''
+              });
               setIsRegister((prev) => !prev);
               setError('');
             }}
