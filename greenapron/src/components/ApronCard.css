@@ -131,7 +131,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* Phones (max width: 600px) */
+/*  (max width: 600px) */
 @media (max-width: 600px) {
   .board {
     flex-direction: column;
@@ -176,7 +176,7 @@ body {
   }
 }
 
-/* Tablets (601px - 1024px) */
+/* (601px - 1024px) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .person-container {
     width: 90%;
